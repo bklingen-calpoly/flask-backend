@@ -1,6 +1,7 @@
 from flask import Flask
 from flask import request
 from flask import jsonify
+import json
 
 
 app = Flask(__name__)
@@ -44,10 +45,23 @@ users = {
 def get_users():
    if request.method == 'GET':
       search_username = request.args.get('name')
-      if search_username :
+      search_job = request.args.get('job')
+      if search_username and search_job :
+         subdict = {'users_list' : []}
+         for user in users['users_list']:
+            if user['name'] == search_username and user['job'] == search_job:
+               subdict['users_list'].append(user)
+         return subdict
+      elif search_username  :
          subdict = {'users_list' : []}
          for user in users['users_list']:
             if user['name'] == search_username:
+               subdict['users_list'].append(user)
+         return subdict
+      elif search_job  :
+         subdict = {'users_list' : []}
+         for user in users['users_list']:
+            if user['job'] == search_job:
                subdict['users_list'].append(user)
          return subdict
       return users
