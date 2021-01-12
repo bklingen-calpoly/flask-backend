@@ -5,6 +5,10 @@ import json
 # for linking frontend-backend
 from flask_cors import CORS
 
+# for random ids
+import random 
+import string 
+
 
 
 app = Flask(__name__)
@@ -45,6 +49,13 @@ users = {
    ]
 }
 
+def gen_random_id():
+   random_id = ''.join([random.choice(string.ascii_letters 
+            + string.digits) for n in range(6)]) 
+   print (random_id)
+   return random_id
+
+
 @app.route('/users', methods=['GET', 'POST', 'DELETE'])
 def get_users():
    if request.method == 'GET':
@@ -71,9 +82,11 @@ def get_users():
       return users
    elif request.method == 'POST':
       userToAdd = request.get_json()
+      userToAdd['id'] = gen_random_id() # check for duplicate before appending.. todo
       users['users_list'].append(userToAdd)
-      resp = jsonify(success=True)
-      #resp.status_code = 200 #optionally, you can always set a response code. 
+#     resp = jsonify(userToAdd, success=True)
+      resp = jsonify(userToAdd)
+      resp.status_code = 201 
       # 200 is the default code for a normal response
       return resp
    elif request.method == 'DELETE':
@@ -81,7 +94,7 @@ def get_users():
       userToDelete = request.get_json()
       users['users_list'].remove(userToDelete)
       resp = jsonify(success=True)
-      #resp.status_code = 200 #optionally, you can always set a response code. 
+      resp.status_code = 200
       # 200 is the default code for a normal response
       return resp
       
