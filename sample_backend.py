@@ -68,12 +68,11 @@ def get_users():
       print(f'search username {search_username}')
       search_job = request.args.get('job')
       if search_username and search_job :
-         users = User().find_by_name_and_job(search_username, search_job)  
+         return find_users_by_name_job(search_username, search_job) 
       elif search_username  :
-         print(f'search username {search_username} db: {User().find_by_name(search_username)}')
          users = User().find_by_name(search_username)
       elif search_job  :
-         users = User().find_by_job(search_job)
+         return find_users_by_job(search_job) 
       else:
          users = User().find_all()
       return {"users_list": users}
@@ -104,3 +103,17 @@ def get_user(id):
          return {}, 204
       else:
          return jsonify({"error": "User not found"}), 404
+
+def find_users_by_name_job(name,job):
+   subdict = {'users_list' : []}
+   for user in users['users_list']:
+      if user['name'] == name and user['job'] == job:
+         subdict['users_list'].append(user)
+    return subdict 
+
+def find_users_by_name_job(job):
+   subdict = {'users_list' : []}
+   for user in users['users_list']:
+      if user['job'] == job:
+         subdict['users_list'].append(user)
+    return subdict 

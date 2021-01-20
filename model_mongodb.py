@@ -47,17 +47,3 @@ class User(Model):
         for user in users:
             user["_id"] = str(user["_id"])
         return users
-
-    def find_by_job(self, job):
-        users = list(self.collection.find({"job": job}))
-        for user in users:
-            user["_id"] = str(user["_id"])
-        return users
-
-
-    def find_by_name_and_job(self, name, job):
-        users = list(self.collection.find({"name": name, "job": job}))
-        for user in users:
-            user["_id"] = str(user["_id"])
-        return users
-
