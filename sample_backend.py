@@ -18,6 +18,8 @@ app = Flask(__name__)
 #Here we'll allow requests coming from any domain. Not recommended for production environment.
 CORS(app) 
 
+""" Comment out now that database is the source of truth
+
 users = { 
    'users_list' :
    [
@@ -48,6 +50,7 @@ users = {
       }
    ]
 }
+"""
 
 @app.route('/')
 
