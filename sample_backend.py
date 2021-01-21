@@ -65,7 +65,6 @@ def hello_world():
 def get_users():
    if request.method == 'GET':
       search_username = request.args.get('name')
-      print(f'search username {search_username}')
       search_job = request.args.get('job')
       if search_username and search_job :
          return find_users_by_name_job(search_username, search_job) 
@@ -109,11 +108,11 @@ def find_users_by_name_job(name,job):
    for user in users['users_list']:
       if user['name'] == name and user['job'] == job:
          subdict['users_list'].append(user)
-    return subdict 
+   return subdict 
 
-def find_users_by_name_job(job):
+def find_users_by_job(job):
    subdict = {'users_list' : []}
    for user in users['users_list']:
       if user['job'] == job:
          subdict['users_list'].append(user)
-    return subdict 
+   return subdict 
