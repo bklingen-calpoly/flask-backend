@@ -18,38 +18,10 @@ app = Flask(__name__)
 #Here we'll allow requests coming from any domain. Not recommended for production environment.
 CORS(app) 
 
-""" comment out since database is now the source of truth
 users = { 
-   'users_list' :
-   [
-      { 
-         'id' : 'xyz789',
-         'name' : 'Charlie',
-         'job': 'Janitor',
-      },
-      {
-         'id' : 'abc123', 
-         'name': 'Mac',
-         'job': 'Bouncer',
-      },
-      {
-         'id' : 'ppp222', 
-         'name': 'Mac',
-         'job': 'Professor',
-      }, 
-      {
-         'id' : 'yat999', 
-         'name': 'Dee',
-         'job': 'Aspring actress',
-      },
-      {
-         'id' : 'zap555', 
-         'name': 'Dennis',
-         'job': 'Bartender',
-      }
-   ]
+   'users_list' : []
 }
-"""
+
 
 @app.route('/')
 
