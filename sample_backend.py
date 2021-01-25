@@ -18,8 +18,6 @@ app = Flask(__name__)
 #Here we'll allow requests coming from any domain. Not recommended for production environment.
 CORS(app) 
 
-""" Comment out now that database is the source of truth
-
 users = { 
    'users_list' :
    [
@@ -50,7 +48,7 @@ users = {
       }
    ]
 }
-"""
+
 
 @app.route('/')
 
@@ -64,7 +62,7 @@ def hello_world():
 #   return random_id
 
 
-@app.route('/users', methods=['GET', 'POST'])
+@app.route('/users', methods=['GET', 'POST','DELETE'])
 def get_users():
    if request.method == 'GET':
       search_username = request.args.get('name')
@@ -88,8 +86,15 @@ def get_users():
       newUser.save()
       resp = jsonify(newUser), 201
       return resp
+   elif request.method == 'DELETE':
+      userToDelete = request.get_json()
+      users['users_list'].remove(userToDelete)
+      resp = jsonify(success=True)
+      resp.status_code = 200
+      # 200 is the default code for a normal response
+      return resp
       
-@app.route('/users/<id>', methods=['GET','DELETE'])
+@app.route('/users/<id>', methods=['GET'])
 
 def get_user(id):
    if request.method == 'GET':
@@ -98,14 +103,7 @@ def get_user(id):
          return user
       else :
          return jsonify({"error": "User not found"}), 404
-   elif request.method == 'DELETE':
-      user = User({"_id":id})
-      resp = user.remove()
-      if (resp['n'] == 1) :
-         return {}, 204
-      else:
-         return jsonify({"error": "User not found"}), 404
-
+      
 def find_users_by_name_job(name,job):
    subdict = {'users_list' : []}
    for user in users['users_list']:
