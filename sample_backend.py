@@ -79,9 +79,6 @@ def get_users():
       return {"users_list": users}
    elif request.method == 'POST':
       userToAdd = request.get_json()
-      # userToAdd['id'] = gen_random_id() # check for duplicate before appending.. todo
-      # users['users_list'].append(userToAdd)
-
       # make DB request to add user
       newUser = User(userToAdd)
       newUser.save()
