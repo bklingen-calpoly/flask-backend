@@ -21,4 +21,4 @@ def test_find_users_by_name_success():
 
 def test_find_users_by_name_fail():  
     expected = {'users_list' : []}
-    assert sample_backend.find_users_by_name("Jeff") == expected
+    assert sample_backend.find_users_by_name("Dee") == expected
