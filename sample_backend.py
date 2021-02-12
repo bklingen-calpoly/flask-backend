@@ -53,11 +53,7 @@ def get_users():
                subdict['users_list'].append(user)
          return subdict
       elif search_username  :
-         subdict = {'users_list' : []}
-         for user in users['users_list']:
-            if user['name'] == search_username:
-               subdict['users_list'].append(user)
-         return subdict
+         return find_users_by_name(search_username)  
       elif search_job  :
          subdict = {'users_list' : []}
          for user in users['users_list']:
@@ -101,4 +97,9 @@ def get_user(id):
       return ({})
    return users
    
-   
+def find_users_by_name(name):
+   subdict = {'users_list' : []}
+   for user in users['users_list']:
+      if user['name'] == name:
+         subdict['users_list'].append(user)
+   return subdict   
