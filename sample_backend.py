@@ -37,11 +37,6 @@ users = {
          'id' : 'zap555', 
          'name': 'Dennis',
          'job': 'Bartender',
-      },
-      {
-         'id' : 'bjk123', 
-         'name': 'Susie',
-         'job': 'Doctor',
       }
    ]
 }
