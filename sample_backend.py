@@ -30,8 +30,13 @@ users = {
       }, 
       {
          'id' : 'yat999', 
-         'name': 'Jeff',
+         'name': 'Dee',
          'job': 'Aspring actress',
+      },
+      {
+         'id' : 'bjk123', 
+         'name': 'Susie',
+         'job': 'Doctor',
       },
       {
          'id' : 'zap555', 
